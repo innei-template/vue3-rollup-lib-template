@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ],
+      "~": [
+        "./src"
+      ]
+    },
+    "types": [
+      "vitest/globals"
+    ]
+  }
+}

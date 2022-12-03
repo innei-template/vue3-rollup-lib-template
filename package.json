@@ -1,0 +1,98 @@
+{
+  "name": "vue-rollup-template",
+  "private": true,
+  "version": "0.0.0",
+  "description": "TODO",
+  "author": "Innei",
+  "license": "MIT",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "types/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "type": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./src": {
+      "import": "./src"
+    },
+    "./src/*": {
+      "import": "./src/*"
+    }
+  },
+  "files": [
+    "dist",
+    "lib",
+    "esm",
+    "readme.md",
+    "tsconfig.json",
+    "types",
+    "src"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --ignore-path ./.prettierignore --write ",
+      "eslint --cache"
+    ]
+  },
+  "bump": {
+    "before": [
+      "npm run package"
+    ],
+    "publish": true,
+    "changelog": true
+  },
+  "scripts": {
+    "prebuild": "rm -rf lib && rm -rf esm",
+    "build": "tsc --build ./src/tsconfig.build.json && tsc --build src/tsconfig.cjs.json",
+    "postbuild": "tsc-alias -p src/tsconfig.build.json && tsc-alias -p src/tsconfig.cjs.json && npm run types",
+    "types": "rm -rf types && tsc --build src/tsconfig.types.json && tsc-alias -p src/tsconfig.types.json",
+    "package": "NODE_ENV=production npm run build && rollup -c",
+    "prepackage": "rm -rf dist",
+    "test": "vitest",
+    "dev": "vite",
+    "prepare": "husky install",
+    "release": "bump"
+  },
+  "peerDependencies": {
+    "vue": "3.2.45"
+  },
+  "devDependencies": {
+    "@innei/bump-version": "1.2.0",
+    "@innei/eslint-config-react-ts": "0.9.5",
+    "@innei/eslint-config-ts": "0.9.5",
+    "@innei/prettier": "0.9.5",
+    "@rollup/plugin-babel": "6.0.3",
+    "@rollup/plugin-commonjs": "23.0.2",
+    "@rollup/plugin-node-resolve": "15.0.1",
+    "@rollup/plugin-typescript": "9.0.2",
+    "@types/node": "18.11.9",
+    "@unocss/preset-wind": "0.46.5",
+    "@vue/babel-plugin-jsx": "1.1.1",
+    "gh-pages": "4.0.0",
+    "husky": "8.0.2",
+    "lint-staged": "13.0.3",
+    "postcss": "8.4.19",
+    "postcss-import": "15.0.0",
+    "postcss-nested": "6.0.0",
+    "prettier": "2.7.1",
+    "rollup": "3.3.0",
+    "rollup-plugin-peer-deps-external": "2.2.4",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-terser": "7.0.2",
+    "tsc-alias": "1.7.1",
+    "tslib": "2.4.1",
+    "typescript": "4.9.3",
+    "unocss": "0.46.5",
+    "vite": "3.2.4",
+    "vite-tsconfig-paths": "3.5.2",
+    "vitest": "0.25.2"
+  }
+}
