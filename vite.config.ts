@@ -4,9 +4,14 @@ import unoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+
 export default defineConfig({
   base: '',
   plugins: [
+    vue(),
+    vueJsx({}),
     unoCSS({
       presets: [
         presetWind({
